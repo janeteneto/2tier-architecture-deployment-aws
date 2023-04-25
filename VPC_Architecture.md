@@ -36,14 +36,57 @@ In simpler terms, an Internet Gateway is like a **doorway that connects your pri
 
 # AWS VPC Steps:
 
-1. Create VPC 10.0.0.0/16
-2. Internet gateway 2.1: attach the IG to VPC
-3. Create a public subnet 10.0.4.0/24 - connection to VPC
-4. Create route table - associate it w public subnet as well as attach to IG
+![image](https://user-images.githubusercontent.com/129942042/234410926-f0d59eee-0359-4e18-8a15-406179d0668f.png)
+
+## 1. Create VPC 10.0.0.0/16
+
+1. Search for VPC Dashboard on AWS
+
+2. Press `Create new VPC`
+
+3. Change to the following settings (use your name) and press `Create VPC`:
+
+![2023-04-25 (1)](https://user-images.githubusercontent.com/129942042/234411788-cd9cea33-adf9-4e1f-b0a9-0dff5811c504.png)
+
+## 2. Create Internet Gateway
+
+1. Look for internet gateway on the left menu
+
+2. Press `Create internet gateway`
+
+3. Add a name to it and create
+
+4. Now, to attach to a VPC, press `Actions` on the internet gateway you just created
+
+5. Attach to your VPC
+
+## 3. Create Route Table
+
+1. Search on the left side menu, open Route Tables and press `Create Route Tables`
+
+2. Give it a name and create
+
+3. Select your route table and edit to add a ``0.0.0.0` destination to allow traffic from anywhere
+
+4. Create another route table for your private ip without adding the `0.0.0.0` rule
+
+## 4. Create Subnet
+
+1. Look on left menu for Subnets and press Create Subnet
+
+2. Settings should be as follows, then create subnet:
+
+![2023-04-25 (17)](https://user-images.githubusercontent.com/129942042/234415191-014f0476-5dd0-48e3-9ed6-b60fe2f8a562.png)
+
+3. To connect to route table, select your subnet and press `edit route table association`
+
+4. Select your route table and save it
+
+5. Create a new subnet for your private ip and connect it to the private route table
 
 # App Deployment on VPC
 
-1. Create AMI for app instance and db instance one at a time (there is a separate README file with steps for this).
+1. Create AMI for app instance and db instance one at a time (there is a separate README file with steps for this)
 2. Create instance for app and db image
 3. Connect app instance through ssh as usual
 4. Create new private subnet
