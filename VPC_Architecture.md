@@ -101,6 +101,8 @@ In simpler terms, an Internet Gateway is like a **doorway that connects your pri
 
 # Autoscalling and Load balancing
 
+![image](https://user-images.githubusercontent.com/129942042/234581170-6ed37d6e-a9d5-4c9d-979b-8f98fcc157fd.png)
+
 ## Load Balancer
 - Receives internet traffic and sends to instances, when the instance is underperforming or not performing well,  it will stop traffic and divert it another instance
 - It distributes traffic between EC2 instances so that no one instance gets overwhelmed
