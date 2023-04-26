@@ -128,8 +128,59 @@ In simpler terms, an Internet Gateway is like a **doorway that connects your pri
 
 
 # Steps:
-1. Launch template with required info
-2. Set Autoscalling Policy (ASG) - Target tracking policy - 50% or above CPU utilisation
-3. Create target group with required ports access
-4. Set Load Balancer - Application Load Balancer (ALB)
+1. delete env variable
+2.
+3. Launch a single EC2 instance with your app AMI 
+4. Add name
+5. Select app security group
+6. Leave VPC as default
+7. Add user data to deploy your app in the background and test if app is running:
+
+````
+#!bin/bash
+sudo apt update -y
+sudo apt upgrade -y
+sudo apt install nginx -y
+sudo apt-get install python-software-properties -y
+curl -sL https://deb.nodesource.com/setup_16.x | sudo -E bash -
+sudo apt-get install nodejs -y
+cd app
+npm install
+node app.js &
+````
+
+7. Check if app is running
+8. If app is running, create a template from the EC2 and use this template to create ASG
+
+## 1. Launch template with required info
+
+- Give it a name `yourname_tech221_app`
+- tick provide guidance
+- select ubuntu 18.04 for AMI
+- Instance type `t2.micro`
+- Press `Launch Template`
+
+## 2. Create ASG - Target Tracking Policy/ Target Groups/ Application Load Balancer
+1. create ASG
+2. give it name `yourname_tech221_app`
+3. select your template
+4. launch
+5. keep vpc as default
+6. select areas:
+
+(image)
+
+7. select your launch template (i selected sharuhks because of the security groups - relauch template w eng99_shahrukh_app sg)
+
+(images)
+
+# how to delete autoscalling group
+select it
+just delete
+
+
+-launch app in the background when launching template or instance idk
+- default vpc
+- provisioning for app in the user data (dont forget to cd to app)
+- 
 
