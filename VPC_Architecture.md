@@ -98,3 +98,36 @@ In simpler terms, an Internet Gateway is like a **doorway that connects your pri
 10. Run `source .bashrc`
 11. Start the app as usual
 12. Seed the database and open posts page 
+
+# Autoscalling and Load balancing
+
+## Load Balancer
+- Receives internet traffic and sends to instances, when the instance is underperforming or not performing well,  it will stop traffic and divert it another instance
+- It distributes traffic between EC2 instances so that no one instance gets overwhelmed
+- Load balancers can help ensure that your application stays available and reliable, even if some of your servers or instances fail.
+- 
+## Autoscalling
+
+- Deletes and terminates the damaged instance and creates a fresh one to replace it, as soon as the application loads balancer says its not performing well
+- While balancer will divert traffic, autoscalling will fix the damaged instance
+- Instances are diverted from one area to another
+
+**Auto scaling group** - group of EC2 instances that automatically scales up or down based on predefined conditions. Essentially, an Auto Scaling group helps ensure that you have the right amount of compute resources available to handle your workload
+
+**Auto Scaling Policy** - set of rules that determine when and how an Auto Scaling group should add or remove EC2 instances based on changes in demand. It essentially tells the Auto Scaling group what actions to take in response to specific conditions.
+
+- There are many auto scalling polocies, but we eill focus on **target tracking** - it adjusts the number of EC2 instances in an Auto Scaling group to maintain a target value for a specific metric, such as CPU utilisation or network traffic.
+
+- With a target tracking policy, you simply specify a target value for the metric that you want to track, and AWS automatically adjusts the size of your Auto Scaling group to maintain that target value. For example, if you set a target CPU utilization of 50%, and the current utilization is higher than 50%, AWS will automatically launch more EC2 instances to bring CPU utilization back down to the target level. Conversely, if CPU utilisation drops below the target level, AWS will terminate some instances to reduce costs.
+
+- A **target group** is a logical grouping of EC2 instances used to route traffic to the registered targets based on the rules defined by us. The load balancer then knows that the instances require ports 80 or 22 for example
+
+- **Scaling up** involves increasing the number of computing resources to meet demand, while **scaling down** involves decreasing the number of resources to match decreased demand.
+
+
+# Steps:
+1. Launch template with required info
+2. Set Autoscalling Policy (ASG) - Target tracking policy - 50% or above CPU utilisation
+3. Create target group with required ports access
+4. Set Load Balancer - Application Load Balancer (ALB)
+
