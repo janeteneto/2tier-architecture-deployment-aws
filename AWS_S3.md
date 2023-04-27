@@ -21,7 +21,7 @@
 -
 # Amazon S3 Setup
 
-- So far, we have used the `tech221.pem` file to ssh into ubuntu, now we will access it with aws access and secret keys to get access to S3:
+## S3 and AWSCLI Setup
 
 1. Create instance with SSH rule on port 22
 2. SSH into the instance using Git terminal
@@ -34,23 +34,39 @@
 9. Insert `eu-west-1`
 10. Insert `json`
 11. Run `aws s3 ls` to list everything available on s3
-13. Create a bucket/folder:
-14. Run `aws s3 mb s3://janete-tech221` to make a bucket with the name `janete-tech221` and if we do `aws s3 ls` we can check if the bucket is there
-15. `sudo nano test.txt` to create file
-16. `aws s3 cp test.txt s3://janete-tech221` - to copy file to your bucket in aws s3
-17. `aws s3 cp s3://janete-tech221/test.txt /home/ubuntu` to copy/download file from bucket to ec2 instance
-18. `aws s3 rm s3://janete-tech221/test.txt` deletes item inside the bucket
-19. `aws s3 rb s3://janete-tech221` to remove the bucket
-20. We can't delete a bucket if it has files inside it
 
+- **Create a bucket/folder:**
 
-- S3 Storage is cost-effective
-- S3 storage classes:
-- 
+12. Run `aws s3 mb s3://janete-tech221` to make a bucket with the name `janete-tech221` and if we do `aws s3 ls` we can check if the bucket is there
+13. `sudo nano test.txt` to create file
+14. `aws s3 cp test.txt s3://janete-tech221` - to copy file to your bucket in aws s3
+15. `aws s3 cp s3://janete-tech221/test.txt /home/ubuntu` to copy/download file from bucket to ec2 instance
+16. `aws s3 rm s3://janete-tech221/test.txt` deletes item inside the bucket
+17. `aws s3 rb s3://janete-tech221` to remove the bucket
 
-16. Upload/download data
-17. 
-18. 
-**CRUD** - Create, Read, Update, Delete
+- We can't delete a bucket if it has files inside it
 
-we need an aws config file and store the keys
+- **Set up python virtual env within instance:**
+1. Run `sudo apt install python-pip -y`
+2. `pip install virtualenv -y`
+3. `sudo apt install virtualenv -y`
+4. `virtualenv env`
+5. `source env/bin/activate` - to get into the environment
+6. `pip install awscli` - to install AWSCLI
+7. `sudo apt install libs3-2` - installs necessary libraries
+
+- **Create a bucket using pyhton boto-3:**
+
+1. To install boto3 run the command `sudo pip3 install boto3`
+2. Run `sudo nano test.py` to create python file to create bucket
+3. Add this to the file:
+````
+import boto3
+AWS_REGION = "eu-west-1"
+client = boto3.client("s3", region_name=AWS_REGION)
+bucket_name = "janete-tech221"
+location = {'LocationConstraint': AWS_REGION}
+response = client.create_bucket(Bucket=bucket_name, CreateBucketConfiguration=location)
+print("Amazon S3 bucket has been created")
+````
+
