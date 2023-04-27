@@ -70,3 +70,27 @@ response = client.create_bucket(Bucket=bucket_name, CreateBucketConfiguration=lo
 print("Amazon S3 bucket has been created")
 ````
 
+1. **To upload file:**
+2. `sudo nano upload.py`
+3. Add to file:
+````
+import boto3
+client = boto3.client('s3')
+s3 = boto3.resource('s3')
+bucket_name="janete-tech221"
+s3.Bucket(bucket_name).upload_file('/home/ubuntu/test.txt', 'test.txt')
+print('File uploaded')
+````
+4. Run `python3 upload.py`
+
+1. **To download file:**
+2. `sudo nano download.py`
+3. Add to file
+````
+import boto3
+s3 = boto3.client('s3')
+s3.download_file('oleg-tech221', 'test.txt', 'test.txt')
+print('file downloaded')
+````
+4. Run `python3 download.py`
+
