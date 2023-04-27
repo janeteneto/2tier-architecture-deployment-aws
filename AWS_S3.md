@@ -89,7 +89,7 @@ print('File uploaded')
 ````
 import boto3
 s3 = boto3.client('s3')
-s3.download_file('oleg-tech221', 'test.txt', 'test.txt')
+s3.download_file('janete-tech221', 'test.txt', 'test.txt')
 print('file downloaded')
 ````
 4. Run `python3 download.py`
